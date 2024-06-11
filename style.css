@@ -1,9 +1,68 @@
-button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
+/* Stellt den allgemeinen Stil des HTML-Dokuments ein */
+body {
+    font-family: Arial, sans-serif; /* Setzt die Schriftart */
+    background-color: #2c3e50; /* Hintergrundfarbe des gesamten Dokuments */
+    color: #ecf0f1; /* Schriftfarbe */
+    display: flex; /* Verwendet Flexbox für die Ausrichtung */
+    justify-content: center; /* Zentriert den Inhalt horizontal */
+    align-items: center; /* Zentriert den Inhalt vertikal */
+    height: 100vh; /* Höhe des Dokuments entspricht der vollen Höhe des Viewports */
+    margin: 0; /* Entfernt Standard-Abstände des Browsers */
 }
 
-p {
-    font-size: 18px;
+/* Stellt den Stil des Containers ein, der den gesamten Inhalt umfasst */
+.container {
+    text-align: center; /* Zentriert den Text innerhalb des Containers */
+    background-color: #34495e; /* Hintergrundfarbe des Containers */
+    padding: 20px; /* Innenabstand (Padding) um den Inhalt des Containers */
+    border-radius: 10px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatteneffekt um den Container */
+    width: 300px; /* Feste Breite des Containers */
+}
+
+/* Stellt den Stil des Headers ein */
+header {
+    margin-bottom: 20px; /* Abstand unterhalb des Headers */
+}
+
+/* Stellt den Stil des Haupttitels ein */
+h1 {
+    font-size: 24px; /* Schriftgröße */
+    margin: 0; /* Entfernt Standard-Abstände */
+    color: #e74c3c; /* Schriftfarbe */
+}
+
+/* Stellt den Stil der Statistiken (Absätze) ein */
+.stats p {
+    font-size: 18px; /* Schriftgröße */
+    margin: 5px 0; /* Vertikaler Abstand oberhalb und unterhalb der Absätze */
+}
+
+/* Stellt den Stil der Steuerungselemente (Buttons) ein */
+.controls {
+    margin-top: 20px; /* Abstand oberhalb der Steuerungselemente */
+}
+
+/* Stellt den allgemeinen Stil für alle Buttons ein */
+button {
+    margin: 5px; /* Außenabstand um die Buttons */
+    padding: 10px; /* Innenabstand innerhalb der Buttons */
+    font-size: 16px; /* Schriftgröße */
+    background-color: #e74c3c; /* Hintergrundfarbe der Buttons */
+    color: #ecf0f1; /* Schriftfarbe der Buttons */
+    border: none; /* Entfernt den Standardrahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Ändert den Mauszeiger auf eine Hand bei Hover */
+    transition: background-color 0.3s; /* Übergangseffekt für die Hintergrundfarbe */
+}
+
+/* Stellt den Stil der Buttons beim Hover (Mauszeiger darüber) ein */
+button:hover {
+    background-color: #c0392b; /* Hintergrundfarbe beim Hover */
+}
+
+/* Stellt den Stil der deaktivierten Buttons ein */
+button:disabled {
+    background-color: #5a5a5af6; /* Hintergrundfarbe für deaktivierte Buttons */
+    cursor: not-allowed; /* Ändert den Mauszeiger zu einem "Nicht erlaubt"-Symbol */
 }
