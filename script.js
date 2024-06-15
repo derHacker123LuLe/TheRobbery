@@ -7,14 +7,13 @@ let index1 = 0;
 let costs = 10;
 let level = 0;
 let Exp = 0;
-let autoRobberyEnabled = false;
+let autoHarvestEnabled = false;
 let salary = 10;
 
 function updateTimer() {
     const timerSpan = document.getElementById("timer");
     timerSpan.textContent = timeLeft > 0 ? timeLeft : upgradeableTime;
-    // Disable the New Robbery button if the timer is running or auto robbery is enabled
-    document.getElementById("newRobbery").disabled = timeLeft > 0 || autoRobberyEnabled;
+    document.getElementById("Harvest").disabled = timeLeft > 0 || autoHarvestEnabled;
 }
 
 function updateMoney() {
@@ -37,11 +36,8 @@ function upgradesalary() {
     document.getElementById("salary").textContent = salary;
 }
 
-upgradeLevel(); // Call the function with the correct case
-console.log("level:", level); // Should print "Lvl: 0"
-
 function upgradeLevel() {
-    level = Math.min(Math.floor(Exp / 10) + 0, 1, 20);
+    level = Math.min(Math.floor(Exp / 10), 20);
 }
 
 function upgradesalary() {
@@ -49,8 +45,6 @@ function upgradesalary() {
         salary += 5;
     }
 }
-
-
 
 function earnMoney() {
     money += 10; // Earn 10 money
@@ -76,28 +70,11 @@ function upgradeTimer() {
     }
 }
 
-function restartTimer() {
-    clearInterval(timerInterval); // Clear the previous timer interval
-    timeLeft = time; // Reset timeLeft to time
-    updateTimer();
-    timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            updateTimer();
-        }
-        if (timeLeft === 0) { // Check if the timer reaches zero
-            clearInterval(timerInterval);
-            earnMoney(); // Award money when the timer reaches zero
-            updateExp(); // Update experience points
-            document.getElementById("newRobbery").disabled = false; // Enable the New Robbery button
-        }
-    }, 1000);
-}
-
 function startTimer() {
     clearInterval(timerInterval); // Clear the previous timer interval
     timeLeft = parseInt(document.getElementById("time").textContent); // Set timeLeft to the value of time
     updateTimer();
+    moveTractor();
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
             timeLeft--;
@@ -107,60 +84,58 @@ function startTimer() {
             clearInterval(timerInterval);
             earnMoney(); // Award money when the timer reaches zero
             updateExp(); // Update experience points
-            document.getElementById("newRobbery").disabled = false; // Enable the New Robbery button
+            document.getElementById("Harvest").disabled = false; // Enable the New Robbery button
         }
     }, 1000);
 }
 
-function startAutoRobbery() {
-    autoRobberyEnabled = true;
-    document.getElementById("autoRobbery").textContent = "Auto Robbery On";
-    autoRobberyInterval = setInterval(() => {
-        if (!document.getElementById("newRobbery").disabled) {
-            document.getElementById("newRobbery").click();
+function startAutoHarvest() {
+    autoHarvestEnabled = true;
+    document.getElementById("autoHarvest").textContent = "Auto Harvest On";
+    autoHarvestInterval = setInterval(() => {
+        if (!document.getElementById("Harvest").disabled) {
+            document.getElementById("Harvest").click();
         }
     }, 1000);
 }
 
-function stopAutoRobbery() {
-    autoRobberyEnabled = false;
-    document.getElementById("autoRobbery").textContent = "Auto Robbery Off";
-    clearInterval(autoRobberyInterval);
+function stopAutoHarvest() {
+    autoHarvestEnabled = false;
+    document.getElementById("autoHarvest").textContent = "Auto Harvest Off";
+    clearInterval(autoHarvestInterval);
 }
 
 function startGame() {
     timeLeft = 0;
-    time = 30; // Set initial time value
-    upgradeableTime = 30; // Reset upgradeable
-    money = 0; // Set initial money value
-    Exp = 0; // Set initial experience value
+    time = 30;
+    money = 0;
+    Exp = 0;
     updateTimer();
-    updateMoney(); // Update the displayed money value
-    updateExp(); // Update the displayed experience value
-    upgradeLevel(); // Call upgradeLevel to update the level based on Exp
-    // Do not start the timer automatically here
+    updateMoney();
+    updateExp();
+    upgradeLevel();
 }
 
 function endGame() {
-    alert("Game Over!"); // Display a message indicating the game is over
+    alert("Game Over!");
 }
 
 function updateLevel() {
     document.getElementById("level").textContent = level;
 }
 
-document.getElementById("newRobbery").addEventListener("click", function() {
-    this.disabled = true; // Disable the New Robbery button when clicked
+document.getElementById("Harvest").addEventListener("click", function() {
+    this.disabled = true;
     startTimer();
 });
 
 document.getElementById("upgradeTimer").addEventListener("click", upgradeTimer);
 
-document.getElementById("autoRobbery").addEventListener("click", function() {
-    if (autoRobberyEnabled) {
-        stopAutoRobbery();
+document.getElementById("autoHarvest").addEventListener("click", function() {
+    if (autoHarvestEnabled) {
+        stopAutoHarvest();
     } else {
-        startAutoRobbery();
+        startAutoHarvest();
     }
 });
 
